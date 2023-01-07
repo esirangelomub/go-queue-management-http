@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "41439c35-a41c-4dd4-b76a-f92d278ed25e",
+		"name": "Go-Queue-Processor-Http",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25080260"
+	},
+	"item": [
+		{
+			"name": "POST",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "allow",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"My Job 1\",\n    \"result\": null,\n    \"status\": \"pending\",\n    \"data\": \"[1, 2, 3, 4]\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9000",
+					"host": [
+						"localhost"
+					],
+					"port": "9000"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9000",
+					"host": [
+						"localhost"
+					],
+					"port": "9000"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL BY STATUS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9000?status=pending",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"query": [
+						{
+							"key": "status",
+							"value": "pending"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

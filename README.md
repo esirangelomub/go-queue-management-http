@@ -1,16 +1,16 @@
-# API REST IN GO
+# API REST / QUEUE IN GO
 
-A simple Rest API made in Go
+A simple Queue Processor with Http Interface
 
 ## Installation
 
-Clone the project [where](git@github.com:esirangelomub/go-api-rest.git).
+Clone the project [where](https://github.com/esirangelomub/go-queue-management-http).
 
 ```bash
-git clone git@github.com:esirangelomub/go-api-rest.git
+git clone git@github.com:esirangelomub/go-queue-management-http.git
 ```
 
-Init the container
+Init DB container
 
 ```bash
 docker-compose up -d
@@ -21,16 +21,16 @@ docker-compose up -d
 #### HTTP Server
 
 ```bash
-go run server.go
+go run main.go
 ```
 
-#### Cron Jobs
+#### Cron Jobs (not yet ready)
 
 ```bash
 go run cron.go
 ```
 
-## Compiling application and run
+## Compiling application and run (not yet ready)
 
 ```bash
 go build
