@@ -16,38 +16,18 @@ Init the container
 docker-compose up -d
 ```
 
-## Create database
-
-```bash
-docker exec -it api-rest-db-1 psql -U postgres 
-```
-```sql
-postgres=# CREATE DATABASE api_rest WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.utf8' LC_CTYPE = 'en_US.utf8';
-```
-```sql
-postgres=# postgres=# CREATE USER user_rest WITH encrypted password '123456';
-```
-```sql
-postgres=# postgres=# CREATE USER user_rest WITH encrypted password '123456';
-```
-```sql
-postgres=# \c api_rest;
-```
-```sql
-api_rest=# CREATE TABLE public.todos (
-      id serial primary key ,
-      title character varying(255),
-      description text,
-      done bool
-);
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO user_rest;
-GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO user_rest;
-```
-
 ## Init application
 
+#### HTTP Server
+
 ```bash
-go run main.go
+go run server.go
+```
+
+#### Cron Jobs
+
+```bash
+go run cron.go
 ```
 
 ## Compiling application and run

@@ -2,23 +2,42 @@ package main
 
 import (
 	"fmt"
-	"time"
+	"go-queue-management-http/queue"
 )
 
+var products = []string{
+	"books",
+	"computers",
+}
+
 func main() {
-	queue := make(chan int)
-
-	// Start a goroutine to process items in the queue
-	go func() {
-		for {
-			item := <-queue
-			fmt.Println("Processing item:", item)
-		}
-	}()
-
-	// Add items to the queue every 10 seconds
-	for i := 0; i < 10; i++ {
-		queue <- i
-		time.Sleep(time.Second * 10)
+	newProducts := []string{
+		"apples",
+		"oranges",
+		"wine",
+		"bread",
+		"orange juice",
 	}
+
+	productsQueue := queue.NewQueue("NewProducts")
+	var jobs []queue.Job
+
+	for _, newProduct := range newProducts {
+		product := newProduct
+		action := func() error {
+			products = append(products, product)
+			return nil
+		}
+		jobs = append(jobs, queue.Job{
+			Name:   fmt.Sprintf("Importing new product: %s", newProduct),
+			Action: action,
+		})
+		//time.Sleep(time.Second * 10)
+	}
+
+	productsQueue.AddJobs(jobs)
+
+	worker := queue.NewWorker(productsQueue)
+	worker.DoWork()
+	defer fmt.Print(products)
 }
