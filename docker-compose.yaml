@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  db:
+    image: 'postgres:14'
+    ports:
+      - "8432:5432"
+    environment:
+      PGPASSWORD: 'password'
+      POSTGRES_DB: 'queue-db'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'password'
+    volumes:
+      - 'go-pgsql:/var/lib/postgresql/data'
+      - './docker/db_preload.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
+    networks:
+      - go-net
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "queue-db", "-U", "postgres" ]
+      retries: 3
+      timeout: 5s
+networks:
+  go-net:
+    driver: bridge
+volumes:
+  go-pgsql:
+    driver: local

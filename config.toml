@@ -1,0 +1,10 @@
+[api]
+port = "9000"
+
+[database]
+
+host = "localhost"
+port = "8432"
+user = "postgres"
+pass = "password"
+name = "queue-db"
